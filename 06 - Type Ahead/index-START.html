@@ -17,6 +17,32 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+  // 1. create cities array
+  const cities = [];
+  // 2. fetch the cities
+
+  // 3. push the cities into the array
+ fetch(endpoint)
+    .then(response => response.json())
+    .then((data) => {
+      data.forEach((element) => cities.push(element.city)
+      )
+    });
+
+
+  const search = document.querySelector('.search');
+
+// 4. addEventListener to search bar
+
+   search.addEventListener('keyup', (event) => {
+     console.log(event);
+   });
+
+
+
+
+// 5. keyup event so when we write into the search bar it filters through the cities
+
 </script>
 </body>
 </html>
