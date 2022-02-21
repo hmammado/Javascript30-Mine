@@ -25,17 +25,34 @@ const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb
  fetch(endpoint)
     .then(response => response.json())
     .then((data) => {
-      data.forEach((element) => cities.push(element.city)
-      )
+      data.forEach((element) => cities.push(element))
     });
 
 
-  const search = document.querySelector('.search');
+
+  const form = document.querySelector('.search-form');
 
 // 4. addEventListener to search bar
 
-   search.addEventListener('keyup', (event) => {
-     console.log(event);
+   form.addEventListener('keyup', (event) => {
+   const search = document.querySelector('.search');
+   const regex = new RegExp(search.value, 'gi');
+   const filteredCities = cities.filter(object => object.city.match(regex) || object.state.match(regex));
+
+   const suggestions = document.querySelector('.suggestions');
+
+   const html = filteredCities.map(object => {
+     const cityName = object.city.replace(regex, `<span class="hl">${search.value} </span>`);
+     const stateName = object.state.replace(regex, `<span class="hl">${search.value}</span>`);
+         return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+      </li>
+    `;
+   }).join('');
+
+   suggestions.innerHTML = html
+
    });
 
 
