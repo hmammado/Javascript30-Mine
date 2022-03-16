@@ -35,6 +35,54 @@
   </style>
 
 <script>
+
+const woah = document.querySelector('h1');
+const heroDiv = document.querySelector('.hero');
+
+
+const walk = 350;
+
+function shadow(event) {
+
+const width = heroDiv.offsetWidth;
+const height = heroDiv.offsetHeight;
+
+console.log(width,height);
+
+let x = event.offsetX;
+let y = event.offsetY;
+
+if(this !== event.target) {
+  x = x + event.target.offsetLeft;
+  y = y + event.target.offsetATop;
+}
+
+
+
+  const xWalk = Math.round((x / width * walk) - (walk / 2));
+  const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+  console.log(xWalk, yWalk);
+
+
+
+  woah.style.textShadow =`${xWalk}px ${yWalk}px 0 blue, ${xWalk * -1}px ${yWalk}px 0 red, ${xWalk}px ${yWalk * -1}px 0 green, ${yWalk}px ${xWalk * -1}px 0 rgba(0,255,0,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)`;
+
+   }
+
+
+
+    heroDiv.addEventListener('mousemove', shadow);
+
+
+  // Query selector H1
+  //Query selector div
+  //Event listener scroll, style
+  //
+
+
+
 </script>
 </body>
 </html>
