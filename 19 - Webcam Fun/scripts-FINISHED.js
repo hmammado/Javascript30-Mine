@@ -8,14 +8,14 @@ function getVideo() {
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(localMediaStream => {
       console.log(localMediaStream);
-    
-//  DEPRECIATION : 
+
+//  DEPRECIATION :
 //       The following has been depreceated by major browsers as of Chrome and Firefox.
 //       video.src = window.URL.createObjectURL(localMediaStream);
 //       Please refer to these:
 //       Deprecated  - https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
 //       Newer Syntax - https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject
-      
+
       video.srcObject = localMediaStream;
       video.play();
     })
@@ -34,8 +34,8 @@ function paintToCanvas() {
     ctx.drawImage(video, 0, 0, width, height);
     // take the pixels out
     let pixels = ctx.getImageData(0, 0, width, height);
-    // mess with them
-    // pixels = redEffect(pixels);
+     mess with them
+     pixels = redEffect(pixels);
 
     pixels = rgbSplit(pixels);
     // ctx.globalAlpha = 0.8;
