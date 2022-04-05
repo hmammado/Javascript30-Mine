@@ -30,11 +30,56 @@
 
 <script>
   const msg = new SpeechSynthesisUtterance();
-  let voices = [];
+  //let voices = [];
   const voicesDropdown = document.querySelector('[name="voice"]');
   const options = document.querySelectorAll('[type="range"], [name="text"]');
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+
+  function populateVoiceList() {
+      if (typeof speechSynthesis === 'undefined') {
+        return;
+      }
+      var voices = speechSynthesis.getVoices();
+      console.log(voices);
+
+      for (var i = 0; i < voices.length; i++) {
+        var option = document.createElement('option');
+        option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+
+        if (voices[i].default) {
+          option.textContent += ' -- DEFAULT';
+        }
+
+        option.setAttribute('data-lang', voices[i].lang);
+        option.setAttribute('data-name', voices[i].name);
+        voicesDropdown.appendChild(option);
+      }
+    }
+
+    populateVoiceList();
+
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+     speechSynthesis.onvoiceschanged = populateVoiceList;}
+
+
+
+   //Select a language
+
+  function speakOutLoud() {
+   const text = options[2].value;
+   msg.text = text;
+
+  const selected =  voicesDropdown.options[voicesDropdown.selectedIndex].getAttribute('data-name');
+
+  console.log(selected);
+
+
+  }
+
+  speakButton.addEventListener('click', speakOutLoud);
+
+
 </script>
 
 </body>
